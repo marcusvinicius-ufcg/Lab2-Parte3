@@ -1,0 +1,50 @@
+@(message: String, eventos: List[models.Evento], temasFiltro: List[models.Tema])
+
+@mainFiltro(message, true, temasFiltro) {
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading">Hackfests</div>
+		
+		<div class="panel-body">
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr align="center">
+						<th width="120" >Data</th>
+						<th width="150" >Nome</th>
+						<th width="200" >Descrição</th>
+						<th width="200">Temas</th>
+						<th width="80">Inscritos</th>
+						<th width="100"  >Opções</th>
+						
+		            </tr>
+				</thead>
+				<tbody>
+					@for(evento <- eventos){
+					
+						<tr class="success">
+							<td width="120">@evento.getData().format("dd MMMM yyyy")</td>
+							
+							<td width="150">@evento.getNome()</td>
+							
+							<td width="200">@evento.getDescricao()</td>
+							
+							<td width="200">
+								@for(tema <- evento.getTemas()){
+									<span class="label label-warning">@tema.getNome()</span>
+								}
+							</td>
+							
+							<td width="80" >@evento.getParticipantes().size()</td>
+							<td width="100" >
+								<form action="/inscricao" method="post">
+									<button class='btn btn-xs btn-info' type="submit" id="@evento.getId()" name="ID" value="@evento.getId()">Increva-se</button>
+									
+								</form>	
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}

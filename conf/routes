@@ -1,0 +1,42 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+# Evento Cadastrar
+GET     /evento/cadastrar         	controllers.Application.abriCadastroEvento()
+POST	/evento/cadastrar 			controllers.Application.cadastrarEvento()
+
+# Evento Editar
+GET     /evento/editar        		controllers.Application.abriEdicaoEvento()
+GET    	/evento/editar/selecionar   controllers.Application.selecionarEvento()
+POST    /evento/editar        		controllers.Application.salvarAlteracaoEvento(id: Long)
+POST	/evento/remover				controllers.Application.removerEvento()
+GET		/evento/remover				controllers.Application.abrirRemoverEvento()
+POST    /evento/tema/remover		controllers.Application.removerTemaEvento(id: Long)
+
+# Tema
+GET		/temas/listar				controllers.Application.listarTemas()
+GET		/temas/cadastrar			controllers.Application.abrirCadastroTemas()
+POST	/temas/cadastrar			controllers.Application.cadastrarTema()
+GET		/temas/editar				controllers.Application.abrirSelecaoTema()
+POST	/temas/editar				controllers.Application.abrirEdicaoTema()
+POST	/temas/editar/salvar		controllers.Application.atualizarTema(id: Long)
+GET		/temas/remover				controllers.Application.abrirRemoverTema()
+POST	/temas/remover				controllers.Application.removerTema()
+GET    	/evento/adicionar/tema	    controllers.Application.selecionarAdicionarTema()
+GET		/evento/tema/abrir			controllers.Application.abrirEventoAdicionarTema()
+POST	/evento/adicionar/tema		controllers.Application.addTemaEvento(id: Long)
+
+POST	/inscrever/participante		controllers.Application.inscrever(id : Long)
+POST	/inscricao					controllers.Application.inscricao()
+GET	    /participanntes				controllers.Application.inscritos()
+POST	/filtrar				    controllers.Application.filtrar()
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

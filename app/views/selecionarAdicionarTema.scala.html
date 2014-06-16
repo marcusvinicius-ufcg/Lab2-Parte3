@@ -1,0 +1,49 @@
+@(eventos: List[models.Evento])
+
+@main("Selecionar Hackfest") {
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Menu</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="nav nav-pills nav-stacked painel">
+								<li><a href="/evento/cadastrar">Cadastrar Evento</a></li>
+								<li><a href="/evento/editar/selecionar">Editar um Evento</a></li>
+								<li><a href="/evento/remover">Excluir Eventos</a></li>
+								<li class="active"><a href="/evento/adicionar/tema">Adicionar Temas</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Selecione um Evento para Adicionar um Tema</div>
+			<div class="panel-body">
+				<form action="/evento/tema/abrir" method="get">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-10">
+								<select name="opcoes" class="form-control">
+									@for(evento <- eventos){
+						    			<option value="@evento.getId()">@evento.getData().format("dd MMMM yyyy") - @evento.getNome()</option>
+						    		}
+									</select>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<p align="center">
+						<a href="/evento/cadastrar" class="btn btn-primary">Voltar</a>
+						<button type="submit" class="btn btn-success">Avançar</button>
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+}

@@ -1,0 +1,89 @@
+@(evento: Form[models.Evento], eventoObject: models.Evento, temas: List[models.Tema])
+
+@import helper._
+
+@main("Adicionando Temas"){
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Menu</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="nav nav-pills nav-stacked painel">
+								<li><a href="/evento/cadastrar">Cadastrar Evento</a></li>
+								<li><a href="/evento/editar/selecionar">Editar um Evento</a></li>
+								<li><a href="/evento/remover">Excluir Eventos</a></li>
+								<li class="active"><a href="/evento/adicionar/tema">Adicionar Temas</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Insira os Temas para Adicionarso Evento</div>
+			<div class="panel-body">
+				
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-6">
+								@inputText(evento("nome"), '_label -> "Nome", 'class -> "form-control input-xlarge disabled")
+							</div>
+							<div class="col-md-6">
+								@inputDate(evento("data"), '_label -> "Data de Planejada", 'class -> "form-control input-xlarge disabled")
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+								@inputText(evento("descricao"), '_label -> "Descrição", 'class -> "form-control input-xlarge disabled")
+							</div>
+					
+						</div>
+						<hr>
+					
+						<div class="row">
+						@form(routes.Application.addTemaEvento(eventoObject.getId())){
+							<div class="col-md-10">
+								<select name="ID_TEMA" class="form-control">
+									@for(tema <- temas){
+						    			<option value="@tema.getId()">@tema.getNome()</option>
+						    		}
+								</select>
+							</div>
+							
+							<div class="col-md-2">
+								<button type="submit" class="btn btn-primary">Adicionar</button>
+							</div>
+						}
+						</div>
+						
+						<hr>
+						<div class="row">
+							<div class="col-md-12">
+								<table class="table table-hover table-condensed">
+									<thead>
+										<tr align="center">
+											<th width="120">Tema</th>
+							            </tr>
+									</thead>
+									<tbody>
+										@for(tema <- eventoObject.getTemas()){
+											<tr class="success">
+												<td width="120">@tema.getNome()</td>											
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+}

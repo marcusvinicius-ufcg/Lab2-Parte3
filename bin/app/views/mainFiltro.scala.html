@@ -1,0 +1,52 @@
+@(title: String, filtro: Boolean, temasFiltro: List[models.Tema])(content: Html)
+@import helper._
+<html>
+    <head>
+        <title>@title</title>
+        
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+    </head>
+    
+    <body>
+    	<div>
+	    	<nav class="navbar navbar-default" >
+	    		<div class="container-fluid">			
+	    			
+	    			<!-- LOGO -->
+			    	<div class="navbar-header">
+			    		<a class="navbar-brand" href="/">Início Hackfest</a>
+			    	</div>
+			    	
+			    	<!-- Menus -->
+			    	<ul class="nav navbar-nav navbar-right">
+        				<li><a href="/evento/cadastrar">Evento</a></li>
+        				<li><a href="/temas/listar">Temas</a></li>
+        				<li><a href="/participanntes">Lista de Participantes</a></li>
+        				@if(filtro){
+				    		<li><a>
+				    			<form action="/filtrar" method="post">
+				    				<select name="filtro">
+				    				<option value="Todos">Todos</option>
+				    					@for(tema <- temasFiltro){
+						    			<option value="@tema.getNome()">@tema.getNome()</option>
+						    			}
+						    			
+									</select>
+									<button type="submit" class="btn btn-xs btn-primary">Filtrar</button>
+								</form>
+							</a></li>
+			    		}
+          			</ul>
+			  	</div>
+		 	</nav>
+	 	</div>
+	 	
+	 	<div class="container">
+	 		@content
+	 	</div>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+@(id: Long, tema: Form[models.Tema])
+
+@import helper._
+
+@main("Editar Tema"){
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Menu</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="nav nav-pills nav-stacked painel">
+								<li><a href="/temas/listar">Temas</a></li>
+								<li class="active"><a href="/temas/cadastrar">Cadastrar Temas</a></li>
+								<li><a href="/temas/editar">Editar Temas</a></li>
+								<li><a href="">Excluir Temas</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Insira as Informações para alterar o Tema</div>
+			<div class="panel-body">
+				
+				@form(routes.Application.atualizarTema(id)){
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-6">
+								@inputText(tema("nome"), '_label -> "Nome", 'class -> "form-control")
+							</div>
+						</div>
+						
+					</div>
+					<hr>
+					<p align="center">
+						<a href="@routes.Application.listarTemas" class="btn btn-primary">Voltar</a>
+						<button type="submit" class="btn btn-success">Salvar</button>
+					</p>
+					}
+			</div>
+		</div>
+	</div>
+}
